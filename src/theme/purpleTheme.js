@@ -1,14 +1,23 @@
 import { createTheme } from '@mui/material';
+
 export const purpleTheme = createTheme({
     palette: {
         primary: {
-            main: '#9c27b0',
+            main: '#BD93F9',
         },
         secondary: {
-            main: '#ff80ab',
+            main: '#6272A4',
         },
         error: {
-            main: '#f44336',
+            main: '#FF5555',
+        },
+        background: {
+            default: '#282A36',
+            paper: '#44475A',
+        },
+        text: {
+            primary: '#F8F8F2',
+            secondary: '#6272A4',
         },
     },
 });
