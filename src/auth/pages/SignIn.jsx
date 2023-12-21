@@ -1,15 +1,12 @@
-import { Login, Google, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Login, Google } from "@mui/icons-material";
 import { Button, ButtonGroup, Grid, Link, TextField } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
 import { AuthLayout } from "../layout/AuthLayout";
+import { PasswordField } from "../components/PasswordField";
 
 export const SignIn = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleClickShowPassword = () => {
-    setShowPassword((prev) => !prev);
-  };
+  const [password, setPassword] = useState("");
 
   return (
     <AuthLayout title="Sign In">
@@ -24,34 +21,9 @@ export const SignIn = () => {
           variant="outlined"
         />
         {/* password field */}
-        <TextField
-          label="Password"
-          placeholder="Enter your password"
-          autoComplete="current-password"
-          type={showPassword ? "text" : "password"}
-          fullWidth
-          variant="outlined"
-          sx={{
-            marginTop: 2,
-          }}
-          InputProps={{
-            // show/hide password icon
-            endAdornment: !showPassword ? (
-              <VisibilityOff
-                onClick={handleClickShowPassword}
-                sx={{
-                  cursor: "pointer",
-                }}
-              />
-            ) : (
-              <Visibility
-                onClick={handleClickShowPassword}
-                sx={{
-                  cursor: "pointer",
-                }}
-              />
-            ),
-          }}
+        <PasswordField
+          password={password}
+          handlePassword={(e) => setPassword(e.target.value)}
         />
         {/* Forgot Password? and Sign Up buttons */}
         <Grid
