@@ -7,11 +7,9 @@ export const AuthLayout = ({ children, title }) => {
       direction="column"
       justifyContent="center"
       alignItems="center"
-      spacing={2}
       sx={{
         minHeight: "100vh",
         backgroundColor: "primary.background",
-        padding: 4,
         // set default outline color
         "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
           borderColor: "primary.main",
@@ -21,15 +19,40 @@ export const AuthLayout = ({ children, title }) => {
       <Grid
         item
         sx={{
-          color: "primary.main",
-          fontSize: "2rem",
-          fontWeight: "bold",
+          // align center vertically and horizontally
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          // set default outline color
+          "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "primary.main",
+          },
+          // add shadow to the card
+          boxShadow: 3,
+          // add padding
+          p: 4,
+          // set background color
+          backgroundColor: "background.paper",
+          // set border radius
+          borderRadius: 2,
+          // set max width
+          maxWidth: 500,
+          margin: 2,
         }}
       >
-        <Typography variant="h3" sx={{ mb: 1 }}>
+        <Typography variant="h3" sx={{ mb: 1, color: "primary.main" }}>
           {title}
         </Typography>
-        {children}
+        <Grid
+          item
+          sx={{
+            // set max width
+            maxWidth: 400,
+          }}
+        >
+          {children}
+        </Grid>
       </Grid>
     </Grid>
   );
