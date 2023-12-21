@@ -12,6 +12,7 @@ import { PasswordField } from "../components/PasswordField";
 
 export const SignUp = () => {
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   return (
     <AuthLayout title="Sign Up">
       <form>
@@ -42,6 +43,12 @@ export const SignUp = () => {
         <PasswordField
           password={password}
           handlePassword={(e) => setPassword(e.target.value)}
+        />
+        <PasswordField
+          label="Confirm Password"
+          placeholder="Confirm your password"
+          password={password2}
+          handlePassword={(e) => setPassword2(e.target.value)}
         />
         {/* other links */}
         <Grid
