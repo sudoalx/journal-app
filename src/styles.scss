@@ -3,9 +3,45 @@
 @import "@fontsource/roboto/500.css";
 @import "@fontsource/roboto/700.css";
 
+$darkBlue: #1976d2;
+$anotherShadeBlue: #607d8b;
+$errorRed: #ff5555;
+$darkBlueBackground: #1a1a2e;
+$lighterBackground: #25274d;
+$lightGrayText: #e1e1e6;
+$secondaryBlueText: #6272a4;
+
+$blueTheme: (
+  primary: $darkBlue,
+  secondary: $anotherShadeBlue,
+  error: $errorRed,
+  background: (
+    default: $darkBlueBackground,
+    paper: $lighterBackground,
+  ),
+  text: (
+    primary: $lightGrayText,
+    secondary: $secondaryBlueText,
+  ),
+);
+
 * {
   font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-y: auto;
+}
+
+*::-webkit-scrollbar {
+  width: 3px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: map-get($blueTheme, "primary");
+  border-radius: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: map-get($blueTheme, "secondary");
 }
