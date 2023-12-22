@@ -11,7 +11,22 @@ export const Sidebar = ({ drawerWidth }) => {
         open
         sx={{
           display: { xs: "none", sm: "block" },
-          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            width: drawerWidth,
+            // Custom styles for scrollbar
+            overflowY: "auto",
+            "&::-webkit-scrollbar": {
+              width: "3px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "primary.light",
+              borderRadius: "6px",
+            },
+            "&::-webkit-scrollbar-track": {
+              backgroundColor: "primary",
+            },
+          },
         }}
       >
         <Toolbar>
