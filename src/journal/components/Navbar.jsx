@@ -1,13 +1,15 @@
 import { LogoutOutlined, MenuOutlined } from "@mui/icons-material";
 import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
 
-export const Navbar = ({ drawerWidth = 240 }) => {
+export const Navbar = ({ drawerWidth }) => {
   return (
     <AppBar
       position="fixed"
       sx={{
         width: { sm: `calc(100% - ${drawerWidth}px)` },
         ml: { sm: `${drawerWidth}px` },
+        backgroundColor: "background.default",
+        color: "text.primary", //
       }}
     >
       <Toolbar>
@@ -24,10 +26,15 @@ export const Navbar = ({ drawerWidth = 240 }) => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Typography variant="h6" noWrap component={"div"}>
+          <Typography
+            variant="h6"
+            noWrap
+            component={"div"}
+            sx={{ color: "text.primary" }}
+          >
             Journal App
           </Typography>
-          <IconButton color="error">
+          <IconButton sx={{ color: "error.main" }}>
             <LogoutOutlined />
           </IconButton>
         </Grid>
