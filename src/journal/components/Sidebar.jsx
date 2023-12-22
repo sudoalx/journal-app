@@ -1,4 +1,17 @@
-import { Box, Divider, Drawer, Toolbar, Typography } from "@mui/material";
+import { TurnedInNot } from "@mui/icons-material";
+import {
+  Box,
+  Divider,
+  Drawer,
+  Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 
 export const Sidebar = ({ drawerWidth }) => {
   return (
@@ -35,6 +48,38 @@ export const Sidebar = ({ drawerWidth }) => {
           </Typography>
         </Toolbar>
         <Divider />
+        <List>
+          {[
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ].map((month) => (
+            <ListItem key={month} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <TurnedInNot color="primary" />
+                </ListItemIcon>
+                <Grid container>
+                  <ListItemText primary={month} />
+                  <ListItemText
+                    secondary={
+                      "Eiusmod ipsum do velit non labore amet cillum ipsum ullamco amet fugiat ea."
+                    }
+                  />
+                </Grid>
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
       </Drawer>
     </Box>
   );
