@@ -1,6 +1,7 @@
 import { TurnedInNot } from "@mui/icons-material";
 import {
   Box,
+  Button,
   Divider,
   Drawer,
   Grid,
@@ -31,9 +32,11 @@ export const Sidebar = ({ drawerWidth }) => {
         }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Alex
-          </Typography>
+          <Button variant="text" sx={{ width: "100%" }}>
+            <Typography variant="h6" noWrap component="div">
+              Alex's Journal
+            </Typography>
+          </Button>
         </Toolbar>
         <Divider />
         <List>
