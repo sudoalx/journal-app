@@ -39,7 +39,7 @@ export const Sidebar = ({ drawerWidth }) => {
           </Button>
         </Toolbar>
         <Divider />
-        <List>
+        <List disablePadding>
           {[
             "January",
             "February",
