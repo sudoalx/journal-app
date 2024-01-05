@@ -6,7 +6,7 @@ import { AuthLayout } from "../layout/AuthLayout";
 import { PasswordField } from "../components/PasswordField";
 import { useForm } from "../../hooks";
 import { useDispatch } from "react-redux";
-import { checkingAuth, startGoogleLogin } from "../../store/auth";
+import { checkingAuth, startGoogleLogin } from "../../store/auth/thunks";
 
 export const SignIn = () => {
   //const [password, setPassword] = useState("");
@@ -24,7 +24,6 @@ export const SignIn = () => {
   };
 
   const handleGoogleSignIn = () => {
-    console.log("Google Sign In");
     dispatch(startGoogleLogin());
   };
 
