@@ -9,13 +9,29 @@ import { Link as RouterLink } from "react-router-dom";
 import { AuthLayout } from "../layout/AuthLayout";
 import { useState } from "react";
 import { PasswordField } from "../components/PasswordField";
+import { useForm } from "../../hooks";
 
 export const SignUp = () => {
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [password2, setPassword2] = useState("");
+
+  const {
+    displayName,
+    email,
+    password,
+    confirmPassword,
+    onInputChange,
+    formState,
+  } = useForm();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formState);
+  };
+
   return (
     <AuthLayout title="Sign Up">
-      <form>
+      <form onSubmit={handleSubmit}>
         {/* name field */}
         <TextField
           label="Name"
@@ -23,6 +39,9 @@ export const SignUp = () => {
           autoComplete="name"
           fullWidth
           variant="outlined"
+          name="displayName"
+          value={displayName}
+          onChange={onInputChange}
           sx={{
             marginTop: 2,
           }}
@@ -35,20 +54,42 @@ export const SignUp = () => {
           type="email"
           fullWidth
           variant="outlined"
+          name="email"
+          value={email}
+          onChange={onInputChange}
           sx={{
             marginTop: 2,
           }}
         />
         {/* password field */}
-        <PasswordField
-          password={password}
-          handlePassword={(e) => setPassword(e.target.value)}
+        <TextField
+          label="Password"
+          placeholder="Enter your password"
+          autoComplete="new-password"
+          type="password"
+          fullWidth
+          variant="outlined"
+          name="password"
+          value={password}
+          onChange={onInputChange}
+          sx={{
+            marginTop: 2,
+          }}
         />
-        <PasswordField
+        {/* confirm password field */}
+        <TextField
           label="Confirm Password"
           placeholder="Confirm your password"
-          password={password2}
-          handlePassword={(e) => setPassword2(e.target.value)}
+          autoComplete="new-password"
+          type="password"
+          fullWidth
+          variant="outlined"
+          name="confirmPassword"
+          value={confirmPassword}
+          onChange={onInputChange}
+          sx={{
+            marginTop: 2,
+          }}
         />
         {/* other links */}
         <Grid
@@ -68,7 +109,7 @@ export const SignUp = () => {
             </ButtonGroup>
           </Grid>
           <Grid item>
-            <Button variant="contained">
+            <Button variant="contained" type="submit" onClick={handleSubmit}>
               <AppRegistration sx={{ marginRight: 1 }} />
               Sign Up
             </Button>
