@@ -7,15 +7,20 @@ import { PasswordField } from "../components/PasswordField";
 import { useForm } from "../../hooks";
 import { useDispatch } from "react-redux";
 import { checkingAuth, startGoogleLogin } from "../../store/auth/thunks";
+import { useSelector } from "react-redux";
+import { useMemo } from "react";
 
 export const SignIn = () => {
   //const [password, setPassword] = useState("");
 
+  const { status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { email, password, onInputChange, formState } = useForm({
     email: "",
     password: "",
   });
+
+  const isAuthenticating = useMemo(() => status === "checking", [status]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -78,7 +83,11 @@ export const SignIn = () => {
             </ButtonGroup>
           </Grid>
           <Grid item>
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              disabled={isAuthenticating}
+            >
               <Login sx={{ marginRight: 1 }} />
               Sign In
             </Button>
@@ -108,7 +117,12 @@ export const SignIn = () => {
           marginTop: 2,
         }}
       >
-        <Button variant="contained" fullWidth onClick={handleGoogleSignIn}>
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={handleGoogleSignIn}
+          disabled={isAuthenticating}
+        >
           <Google sx={{ marginRight: 1 }} />
           Sign In with Google
         </Button>
