@@ -14,9 +14,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useSelector } from "react-redux";
+import { SideBarItem } from "./SideBarItem";
 
 export const Sidebar = ({ drawerWidth }) => {
   const { displayName } = useSelector((state) => state.auth);
+  const { notes } = useSelector((state) => state.journal);
 
   return (
     <Box
@@ -43,35 +45,8 @@ export const Sidebar = ({ drawerWidth }) => {
         </Toolbar>
         <Divider />
         <List disablePadding>
-          {[
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-          ].map((month) => (
-            <ListItem key={month} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <TurnedInNot color="primary" />
-                </ListItemIcon>
-                <Grid container>
-                  <ListItemText primary={month} />
-                  <ListItemText
-                    secondary={
-                      "Eiusmod ipsum do velit non labore amet cillum ipsum ullamco amet fugiat ea."
-                    }
-                  />
-                </Grid>
-              </ListItemButton>
-            </ListItem>
+          {notes.map((note) => (
+            <SideBarItem key={note.id} {...note} />
           ))}
         </List>
       </Drawer>
