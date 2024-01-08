@@ -20,7 +20,7 @@ const formData = {
 const formValidations = {
   email: [
     (value) => value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
-    "Email inválido.",
+    "Por favor ingrese un correo electrónico válido.",
   ],
   password: [
     (value) => value.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/),
@@ -28,11 +28,12 @@ const formValidations = {
   ],
   displayName: [
     (value) => value.match(/^[a-zA-Z\s]*$/) && value.length > 2,
-    "Nombre inválido: solo se permiten letras y espacios.",
+    "Solo se permiten letras y espacios.",
   ],
 };
 
 export const SignUp = () => {
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const {
     formState,
     displayName,
@@ -48,12 +49,15 @@ export const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!isFormValid) {
+      setFormSubmitted(true);
+      return;
+    }
     console.log("sending:", formState);
   };
 
   return (
     <AuthLayout title="Sign Up">
-      <h1>FormValid {isFormValid ? "true" : "false"}</h1>
       <form onSubmit={handleSubmit}>
         {/* name field */}
         <TextField
@@ -65,7 +69,7 @@ export const SignUp = () => {
           name="displayName"
           value={displayName}
           onChange={onInputChange}
-          error={!!displayNameValid}
+          error={!!displayNameValid && formSubmitted}
           helperText={displayNameValid}
           required
           sx={{
@@ -83,7 +87,7 @@ export const SignUp = () => {
           name="email"
           value={email}
           onChange={onInputChange}
-          error={!!emailValid}
+          error={!!emailValid && formSubmitted}
           helperText={emailValid}
           required
           sx={{
@@ -101,7 +105,7 @@ export const SignUp = () => {
           name="password"
           value={password}
           onChange={onInputChange}
-          error={!!passwordValid}
+          error={!!passwordValid && formSubmitted}
           helperText={passwordValid}
           required
           sx={{
