@@ -2,9 +2,8 @@ import { IconButton } from "@mui/material";
 import { JournalLayout } from "../layout/JournalLayout";
 import { NoteView, NothingSelected } from "../views";
 import { AddOutlined } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startNewNote } from "../../store/journal";
-import { useSelector } from "react-redux";
 
 export const JournalPage = () => {
   const dispatch = useDispatch();
