@@ -13,8 +13,11 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { useSelector } from "react-redux";
 
 export const Sidebar = ({ drawerWidth }) => {
+  const { displayName } = useSelector((state) => state.auth);
+
   return (
     <Box
       component="nav"
@@ -34,7 +37,7 @@ export const Sidebar = ({ drawerWidth }) => {
         <Toolbar>
           <Button variant="text" sx={{ width: "100%" }}>
             <Typography variant="h6" noWrap component="div">
-              Alex's Journal
+              {displayName}'s Journal
             </Typography>
           </Button>
         </Toolbar>
