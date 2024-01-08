@@ -5,7 +5,6 @@ const provider = new GoogleAuthProvider();
 export const signInWithGoogle = async () => {
     const auth = FirebaseAuth;
     try {
-        console.log("signing in with google")
         const result = await signInWithPopup(auth, provider);
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const { displayName, email, photoURL, uid } = result.user;
