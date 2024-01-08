@@ -70,3 +70,15 @@ export const registerWithEmailPassword = async (email, password, displayName) =>
         }
     }
 }
+
+export const logoutFirebase = async () => {
+    const auth = FirebaseAuth;
+    try {
+        await auth.signOut();
+        return {
+            ok: true,
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
