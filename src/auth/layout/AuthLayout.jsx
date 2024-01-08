@@ -4,6 +4,7 @@ export const AuthLayout = ({ children, title }) => {
   return (
     <Grid
       container
+      className="animate__animated animate__fadeIn animate__fast"
       direction="column"
       justifyContent="center"
       alignItems="center"
