@@ -103,8 +103,8 @@ export const NoteView = () => {
           type="text"
           variant="filled"
           fullWidth
-          placeholder="Ingrese un título"
-          label="Título"
+          placeholder="Enter a title"
+          label="Title"
           sx={{ border: "none", mb: 1 }}
           name="title"
           value={title}
@@ -116,7 +116,7 @@ export const NoteView = () => {
           variant="filled"
           fullWidth
           multiline
-          placeholder="¿Qué sucedió en el día de hoy?"
+          placeholder="What happened today?"
           minRows={5}
           name="body"
           value={body}
