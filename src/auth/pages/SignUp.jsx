@@ -18,7 +18,10 @@ import { useState } from "react";
 import { PasswordField } from "../components/PasswordField";
 import { useForm } from "../../hooks";
 import { useDispatch } from "react-redux";
-import { startCreateUserWithEmailAndPassword } from "../../store/auth";
+import {
+  startCreateUserWithEmailAndPassword,
+  startGoogleLogin,
+} from "../../store/auth";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
 
@@ -71,6 +74,9 @@ export const SignUp = () => {
     }
     console.log(formState);
     dispatch(startCreateUserWithEmailAndPassword(formState));
+  };
+  const handleGoogleSignIn = () => {
+    dispatch(startGoogleLogin());
   };
 
   return (
@@ -205,7 +211,12 @@ export const SignUp = () => {
           marginTop: 2,
         }}
       >
-        <Button variant="contained" fullWidth>
+        <Button
+          variant="contained"
+          fullWidth
+          disabled={isCheckingAuth}
+          onClick={handleGoogleSignIn}
+        >
           <Google sx={{ marginRight: 1 }} />
           Sign Up with Google
         </Button>
