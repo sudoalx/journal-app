@@ -1,22 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit'
-
-const initialState = {
-    isSaving: false,
-    messageSaved: '',
-    notes: [],
-    active: null,
-    // active: {
-    //     id: null,
-    //     title: '',
-    //     body: '',
-    //     date: null,
-    //     imageUrls: []
-    // }
-}
+import { createSlice } from '@reduxjs/toolkit';
 
 export const journalSlice = createSlice({
-    name: "journal",
-    initialState,
+    name: 'journal',
+    initialState: {
+        isSaving: false,
+        messageSaved: '',
+        notes: [],
+        active: null,
+        // active: {
+        //     id: 'ABC123',
+        //     title: '',
+        //     body: '',
+        //     date: 1234567,
+        //     imageUrls: [], // https://foto1.jpg, https://foto2.jpg, https://foto3.jpg
+        // }
+    },
     reducers: {
         creatingNewNote: (state) => {
             state.isSaving = true;
@@ -36,7 +34,7 @@ export const journalSlice = createSlice({
             state.isSaving = true;
             state.messageSaved = '';
         },
-        updateNote: (state, action) => {
+        updateNote: (state, action) => { // payload: note
             state.isSaving = false;
             state.notes = state.notes.map(note => {
 
@@ -47,7 +45,7 @@ export const journalSlice = createSlice({
                 return note;
             });
 
-            state.messageSaved = `${action.payload.title}, updated successfully`;
+            state.messageSaved = `${action.payload.title}, successfully saved!`;
         },
         setPhotosToActiveNote: (state, action) => {
             state.active.imageUrls = [...state.active.imageUrls, ...action.payload];
@@ -68,4 +66,16 @@ export const journalSlice = createSlice({
     }
 });
 
-export const { creatingNewNote, addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, deleteNoteById } = journalSlice.actions;
+
+// Action creators are generated for each case reducer function
+export const {
+    addNewEmptyNote,
+    clearNotesLogout,
+    deleteNoteById,
+    creatingNewNote,
+    setActiveNote,
+    setNotes,
+    setPhotosToActiveNote,
+    setSaving,
+    updateNote,
+} = journalSlice.actions;
