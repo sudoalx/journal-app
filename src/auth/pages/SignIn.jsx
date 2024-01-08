@@ -1,19 +1,30 @@
 import { Login, Google } from "@mui/icons-material";
-import { Button, ButtonGroup, Grid, Link, TextField } from "@mui/material";
+import {
+  Alert,
+  Button,
+  ButtonGroup,
+  Grid,
+  Link,
+  TextField,
+} from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
 import { AuthLayout } from "../layout/AuthLayout";
 import { PasswordField } from "../components/PasswordField";
 import { useForm } from "../../hooks";
 import { useDispatch } from "react-redux";
-import { checkingAuth, startGoogleLogin } from "../../store/auth/thunks";
+import {
+  checkingAuth,
+  startGoogleLogin,
+  startLoginWithEmailAndPassword,
+} from "../../store/auth/thunks";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
 
 export const SignIn = () => {
   //const [password, setPassword] = useState("");
 
-  const { status } = useSelector((state) => state.auth);
+  const { status, errorMessage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { email, password, onInputChange, formState } = useForm({
     email: "",
@@ -25,7 +36,7 @@ export const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ email, password });
-    dispatch(checkingAuth());
+    dispatch(startLoginWithEmailAndPassword({ email, password }));
   };
 
   const handleGoogleSignIn = () => {
@@ -69,10 +80,11 @@ export const SignIn = () => {
           direction={{ xs: "column", sm: "row" }}
           justifyContent="space-between"
           alignItems="center"
-          sx={{
-            marginTop: 2,
-          }}
+          sx={{}}
         >
+          <Grid item display={errorMessage ? "block" : "none"}>
+            <Alert severity="error">{errorMessage}</Alert>
+          </Grid>
           <Grid item>
             <ButtonGroup variant="text">
               <Button>Forgot Password?</Button>
