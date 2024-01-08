@@ -11,23 +11,40 @@ import { useState } from "react";
 import { PasswordField } from "../components/PasswordField";
 import { useForm } from "../../hooks";
 
-export const SignUp = () => {
-  // const [password, setPassword] = useState("");
-  // const [password2, setPassword2] = useState("");
+const formData = {
+  email: "",
+  password: "",
+  displayName: "",
+};
 
+const formValidations = {
+  email: [(value) => value.includes("@"), "El correo debe de tener una @"],
+  password: [
+    (value) => value.length >= 6,
+    "El password debe de tener más de 6 letras.",
+  ],
+  displayName: [(value) => value.length >= 1, "El nombre es obligatorio."],
+};
+
+export const SignUp = () => {
   const {
+    formState,
     displayName,
     email,
     password,
     confirmPassword,
     onInputChange,
-    formState,
-  } = useForm();
+    displayNameValid,
+    passwordValid,
+    emailValid,
+  } = useForm(formData, formValidations);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formState);
   };
+
+  console.log(displayNameValid);
 
   return (
     <AuthLayout title="Sign Up">
@@ -42,6 +59,8 @@ export const SignUp = () => {
           name="displayName"
           value={displayName}
           onChange={onInputChange}
+          error={false}
+          helperText="Name is required."
           sx={{
             marginTop: 2,
           }}
@@ -77,7 +96,7 @@ export const SignUp = () => {
           }}
         />
         {/* confirm password field */}
-        <TextField
+        {/* <TextField
           label="Confirm Password"
           placeholder="Confirm your password"
           autoComplete="new-password"
@@ -90,7 +109,7 @@ export const SignUp = () => {
           sx={{
             marginTop: 2,
           }}
-        />
+        /> */}
         {/* other links */}
         <Grid
           container
