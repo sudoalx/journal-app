@@ -12,6 +12,7 @@ export const NothingSelected = () => {
         backgroundColor: "background.paper",
         borderRadius: "10px",
       }}
+      className="animate__animated animate__fadeIn animate__fast"
     >
       <Grid item sx={{ textAlign: "center" }}>
         <Button sx={{ borderRadius: "10px", marginBottom: "1rem" }}>
