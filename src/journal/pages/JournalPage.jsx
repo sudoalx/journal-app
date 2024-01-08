@@ -15,37 +15,30 @@ export const JournalPage = () => {
 
   return (
     <JournalLayout>
-      {active ? (
-        <NoteView />
-      ) : (
-        <>
-          <NothingSelected />
-
-          <IconButton
-            onClick={onClickNewNote}
-            disabled={isSaving}
-            size="large"
-            sx={{
-              color: "text.primary",
-              transition: "all 0.3s ease",
-              backgroundColor: "primary.main",
-              "&:disabled": {
-                backgroundColor: "primary.light",
-              },
-              ":hover": {
-                backgroundColor: "primary.dark",
-              },
-              position: "fixed",
-              bottom: "20px",
-              right: "20px",
-              borderRadius: "50%",
-              boxShadow: 2,
-            }}
-          >
-            <AddOutlined sx={{ fontSize: 30 }} />
-          </IconButton>
-        </>
-      )}
+      {active ? <NoteView /> : <NothingSelected />}
+      <IconButton
+        onClick={onClickNewNote}
+        disabled={isSaving}
+        size="large"
+        sx={{
+          color: "text.primary",
+          transition: "all 0.3s ease",
+          backgroundColor: "primary.main",
+          "&:disabled": {
+            backgroundColor: "primary.light",
+          },
+          ":hover": {
+            backgroundColor: "primary.dark",
+          },
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          borderRadius: "50%",
+          boxShadow: 2,
+        }}
+      >
+        <AddOutlined sx={{ fontSize: 30 }} />
+      </IconButton>
     </JournalLayout>
   );
 };
