@@ -6,7 +6,6 @@ import { useCheckAuth } from "../hooks";
 
 export const AppRouter = () => {
   const status = useCheckAuth();
-  console.log(status);
 
   if (status === "checking") {
     return <CheckingAuth />;
@@ -19,7 +18,7 @@ export const AppRouter = () => {
       ) : (
         <Route path="/auth/*" element={<AuthRoutes />} />
       )}
-      <Route path="/*" element={Navigate("/auth/login")} />
+      <Route path="/*" element={<Navigate to="/auth/login" />} />
     </Routes>
   );
 };
