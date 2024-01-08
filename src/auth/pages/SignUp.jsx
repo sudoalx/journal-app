@@ -18,12 +18,18 @@ const formData = {
 };
 
 const formValidations = {
-  email: [(value) => value.includes("@"), "El correo debe de tener una @"],
-  password: [
-    (value) => value.length >= 6,
-    "El password debe de tener más de 6 letras.",
+  email: [
+    (value) => value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
+    "Email inválido.",
   ],
-  displayName: [(value) => value.length >= 1, "El nombre es obligatorio."],
+  password: [
+    (value) => value.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/),
+    "La contraseña debe tener al menos 8 caracteres, una letra y un número.",
+  ],
+  displayName: [
+    (value) => value.match(/^[a-zA-Z\s]*$/) && value.length > 2,
+    "Nombre inválido: solo se permiten letras y espacios.",
+  ],
 };
 
 export const SignUp = () => {
@@ -37,17 +43,17 @@ export const SignUp = () => {
     displayNameValid,
     passwordValid,
     emailValid,
+    isFormValid,
   } = useForm(formData, formValidations);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formState);
+    console.log("sending:", formState);
   };
-
-  console.log(displayNameValid);
 
   return (
     <AuthLayout title="Sign Up">
+      <h1>FormValid {isFormValid ? "true" : "false"}</h1>
       <form onSubmit={handleSubmit}>
         {/* name field */}
         <TextField
@@ -59,8 +65,9 @@ export const SignUp = () => {
           name="displayName"
           value={displayName}
           onChange={onInputChange}
-          error={false}
-          helperText="Name is required."
+          error={!!displayNameValid}
+          helperText={displayNameValid}
+          required
           sx={{
             marginTop: 2,
           }}
@@ -76,6 +83,9 @@ export const SignUp = () => {
           name="email"
           value={email}
           onChange={onInputChange}
+          error={!!emailValid}
+          helperText={emailValid}
+          required
           sx={{
             marginTop: 2,
           }}
@@ -91,6 +101,9 @@ export const SignUp = () => {
           name="password"
           value={password}
           onChange={onInputChange}
+          error={!!passwordValid}
+          helperText={passwordValid}
+          required
           sx={{
             marginTop: 2,
           }}
