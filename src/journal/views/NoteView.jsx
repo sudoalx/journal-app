@@ -40,7 +40,7 @@ export const NoteView = () => {
 
   useEffect(() => {
     if (messageSaved.length > 0) {
-      Swal.fire("Note updated!", messageSaved, "success");
+      Swal.fire("Note saved!", messageSaved, "success");
     }
   }, [messageSaved]);
 
