@@ -10,6 +10,7 @@ export const NoteView = () => {
       justifyContent={"space-between"}
       alignItems={"center"}
       sx={{ mb: 2 }}
+      className="animate__animated animate__fadeIn animate__fast"
     >
       <Grid item>
         <Typography variant={"h5"}>New note</Typography>
