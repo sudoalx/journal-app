@@ -4,12 +4,23 @@ import {
   VisibilityOff,
   AppRegistration,
 } from "@mui/icons-material";
-import { Button, ButtonGroup, Grid, Link, TextField } from "@mui/material";
+import {
+  Alert,
+  Button,
+  ButtonGroup,
+  Grid,
+  Link,
+  TextField,
+} from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { AuthLayout } from "../layout/AuthLayout";
 import { useState } from "react";
 import { PasswordField } from "../components/PasswordField";
 import { useForm } from "../../hooks";
+import { useDispatch } from "react-redux";
+import { startCreateUserWithEmailAndPassword } from "../../store/auth";
+import { useSelector } from "react-redux";
+import { useMemo } from "react";
 
 const formData = {
   email: "",
@@ -33,13 +44,18 @@ const formValidations = {
 };
 
 export const SignUp = () => {
+  const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const { status, errorMessage } = useSelector((state) => state.auth);
+  const isCheckingAuth = useMemo(() => status === "checking", [status]);
+
   const {
     formState,
     displayName,
     email,
     password,
-    confirmPassword,
+    // confirmPassword,
     onInputChange,
     displayNameValid,
     passwordValid,
@@ -53,7 +69,8 @@ export const SignUp = () => {
       setFormSubmitted(true);
       return;
     }
-    console.log("sending:", formState);
+    console.log(formState);
+    dispatch(startCreateUserWithEmailAndPassword(formState));
   };
 
   return (
@@ -144,8 +161,21 @@ export const SignUp = () => {
               </Link>
             </ButtonGroup>
           </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{ mb: 2, mt: 2 }}
+            display={!!errorMessage ? "block" : "none"}
+          >
+            <Alert severity="error">{errorMessage}</Alert>
+          </Grid>
           <Grid item>
-            <Button variant="contained" type="submit" onClick={handleSubmit}>
+            <Button
+              variant="contained"
+              type="submit"
+              onClick={handleSubmit}
+              disabled={isCheckingAuth}
+            >
               <AppRegistration sx={{ marginRight: 1 }} />
               Sign Up
             </Button>
