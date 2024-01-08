@@ -24,7 +24,7 @@ export const SideBarItem = ({ title = "", body, id, date, imageUrls = [] }) => {
   return (
     <ListItem disablePadding>
       <ListItemButton onClick={onClickNote}>
-        <ListItemIcon>
+        <ListItemIcon sx={{ color: "text.secondary" }}>
           <TurnedInNot />
         </ListItemIcon>
         <Grid container>
